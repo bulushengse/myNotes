@@ -1,0 +1,20 @@
+一台服务器装1.8jdk和1.6jdk
+
+1.8jdk和tomcat8 正常使用正常安装   系统环境变量:JAVA_HOME=D:\JAVA1.8,Path=...;%JAVA_HOME%\bin;...
+
+
+
+1.6jdk和tomcat6  
+
+1.新增系统环境变量JAVA_HOME2=D:\JAVA1.6 ,JRE_HOME2=D:\JAVA1.6
+(配置其中一个即可，tomcat启动时先去找JRE目录 目录找不到回去找JAVA_HOME下的JDK目录)
+
+2.tomcat6配置:修改tomcat6的bin目录下service.bat和setclasspath.bat两个文件，
+将文件中的所有的JAVA_HOME替换成JAVA_HOME2,JRE_HOME替换成JRE_HOME2（感觉替换对应的一个即可）
+
+3.修改tomcat6端口的问题
+<Connector port="8992" protocol="HTTP/1.1" 
+               connectionTimeout="20000" 
+               redirectPort="8443" />
+			   
+<Connector port="8111" protocol="AJP/1.3" redirectPort="8443" />
