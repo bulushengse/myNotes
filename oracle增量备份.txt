@@ -1,0 +1,26 @@
+oracle增量备份   
+
+//全库导出 （整个数据库）
+exp system/manager file=test1.dmp inctype=complete
+ 
+//"增量型"导出（备份上一次备份后改变的数据，表中有一行数据变更，则会导出全表数据）
+exp system/manager file=test2.dmp inctype=incremental  ）
+
+//"累计型"导出（备份自上次“完全”导出之后数据库中变化的数据）
+exp system/manager file=test3.dmp inctype=cumulative
+
+
+//全库导入
+imp system/manager file=test1.dmp ignore=y full=y inctype=system 
+//增量导入（累计增量导入）
+imp system/manager file=test2.dmp ignore=y full=y inctype=restore 
+
+
+测试：
+exp zhoubc1/zhoubc file=test1.dmp inctype=complete //全库导出
+
+imp zhoubc1/zhoubc file=test1.dmp ignore=y full=y inctype=system //全库导入
+  
+exp zhoubc1/zhoubc file=test2.dmp inctype=incremental//增量导出
+
+imp zhoubc1/zhoubc file=test2.dmp ignore=y full=y inctype=restore//增量导入

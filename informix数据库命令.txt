@@ -1,0 +1,29 @@
+创建informix用户   ‘spdbets’.t_user
+groupadd informix  
+useradd -g informix informix
+''
+su - informix   切换到informix用户
+
+onstat -   查看当前数据库状态
+onstat -u  显示连接的用户信息
+
+oninit -iv  初始化数据库
+
+onmode -ky  关闭数据库
+
+改变工作模式
+onmode [-k]??[-m]??[-s]??[-u]?... 
+-k?转到离线(off-line)模式
+-m?从静模式(quiescent)转到在线(on-line)模式
+-s?从在线模式转到静模式,允许所有正进行的业务做完,但不允许新的连接
+-u?从在线模式立即转到静模式,不等业务做完?
+
+dbaccess   连接并使用数据库
+
+touch demo_mytabsp.dbs
+chmod 600 demo_mytabsp.dbs
+onspaces -c -d xxx -p /opt/informix/etc/demo_mytabsp.dbs -o 0 -s 1000000 创建表空间1G
+onspaces -d xxx  删除表空间
+
+dbexport -o /opt/informix/dbexport xxx    将数据库xxx导出到/opt/informix/dbexport/xxx.exp目录下
+dbimport -c -i /opt/informix/dbexport mydb [-d dbspace]  导入xxx数据库 [-d dbspace]指定表空间
