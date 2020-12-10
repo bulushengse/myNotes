@@ -1,0 +1,23 @@
+【笔记】获取用户列表中所有用户的用户名集合 list.stream().map().collect(Collectors.toList())
+
+
+List<User> users = getList(); //从数据库查询的用户集合
+List<String> names=new ArrayList<String>();
+//users :用户集合
+for(int i=0;i<users.size();i++){
+　　names.add(users.get(i).getName());
+ 
+}
+使用java8 api方法list.stream().map().collect(Collectors.toList()) 可以一行完成
+
+ 
+List<String> names= users.stream().map(User::getName).collect(Collectors.toList())
+//users User实体类对象集合
+//User 实体类
+//getName 实体类属性的get方法
+
+//或者
+List<String> names= users.stream().map(user->user.getName()).collect(Collectors.toList());
+//user User实体类对象
+//getName 实体类属性的get方法
+User::getName和user ->user.getName()都是 lambda表达式

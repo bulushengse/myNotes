@@ -1,0 +1,46 @@
+
+
+在要提交的项目文件夹里右键点击Git Bash Here
+
+git config --global user.name aaa        	登录github用户名
+
+git config --global user.email aaa1@qq.com      登录github邮箱
+
+	上传项目到github
+　　1.git init //把这个目录变成Git可以管理的仓库
+　　(2.)git add README.md   touch README.md //文件添加到仓库
+　　3.git add . //不但可以跟单一文件，还可以跟通配符，更可以跟目录。一个点就把当前目录下所有未追踪的文件全部add了 
+　　4.git commit -m "first commit" //把文件提交到仓库
+　　5.git remote add origin git@github.com:wangjiax9/practice.git //关联远程仓库
+	(git remote add origin https://github.com/shench5612390/Test.git”)
+　　6.git push -u origin master //把本地库的所有内容推送到远程库上
+	
+	更新代码到github
+    1.git add .
+    2.git commit -m "2" 
+    (3.)git pull origin master //上传github之前pull一下
+（git pull --rebase origin master）//合并
+（git pull origin master --allow-unrelated-histories） //把两段不相干的 分支进行强行合并
+    4.git push -u origin master
+
+	github拉取项目到本地
+   1.新建文件夹，文件命名拉取的项目名
+   2.git init //把这个目录变成Git可以管理的仓库
+   3.git pull https://github.com/shench5612390/Test.git
+
+
+
+
+    git log --pretty=oneline
+
+登录github上可以查看到本地提交到仓库的代码和记录
+
+dir				查看有哪些文件夹
+
+git status -s 			列出当前目录所有还没有被git管理的文件和被git管理且被修改但还未提交
+
+git rm -r --cached target  	删除target文件夹
+
+git pull --rebase origin master    代码合并
+
+git remote rm origin            删除远程 Git 仓库

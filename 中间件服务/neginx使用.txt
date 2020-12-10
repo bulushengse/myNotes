@@ -1,0 +1,79 @@
+
+Nginx (engine x) 是一个高性能的HTTP和反向代理服务器，也是一个IMAP/POP3/SMTP服务器。
+
+官网 http://nginx.org/en/download.html 下载并解压。
+
+在nginx-1.19.5\conf下，打开nginx.conf，在server里面，相当于一个代理服务器，可以配置多个server。
+
+listen：表示当前的代理服务器监听的端口，默认80端口。注意，如果我们配置了多个server，这个listen要配置不一样，不然就不能确定转到哪里去了。
+
+server_name：表示监听到之后需要转到哪里，默认转到本地，直接到nginx文件夹内。
+
+location：表示匹配的路径，配置了/表示所有请求都被匹配到这里。
+
+root：里面配置了root表示当匹配这个请求的路径时，将会在这个文件夹内寻找相应的文件，这对之后的静态文件很有用。
+
+index：当没有指定主页时，默认会选择指定的文件，可以有多个，并按顺序来加载，如果第一个不存在，则找第二个，依此类推。
+
+我们修改nginx.conf文件，listen的端口为8800。               
+
+cmd 到nginx的目录，输入命令start nginx 启动服务,  
+打开任务管理器，详细信息里如没有nginx.exe的进程，查看在nginx目录中的logs文件夹下error.log
+
+浏览器访问http://localhost:8800/，出现欢迎页就说明部署成功了。
+
+nginx -t
+start nginx
+nginx -s reload 重启
+nginx -s stop  强制关闭
+nginx -s quit  安全关闭
+
+
+nginx配置反向代理
+
+准备两个tomcat，启动服务
+配置neginx.conf，参考neginx_conf_readme.conf
+nginx启动 start nginx
+测试http://localhost:8800/SSM ，http://localhost:8800/LTWeb
+
+nginx负载均衡策略
+
+#轮询（默认）
+upstream ltweb {
+  server 192.168.1.84:8992;
+  server 192.168.1.85:8992;
+}
+#随机
+upstream ltweb {
+  random; 
+  server 192.168.1.84:8992;
+  server 192.168.1.85:8992;
+}
+#指定权重 用于后端服务器性能不均的情况。
+upstream ltweb {
+  server 192.168.1.84:8992 weight=4;
+  server 192.168.1.85:8992 weight=6;
+}
+#IP绑定 ip_hash
+#每个请求按访问ip的hash结果分配，可以解决session的问题。 
+upstream ltweb {
+  ip_hash;
+  server 192.168.1.84:8992;
+  server 192.168.1.85:8992;
+}
+#url_hash 按访问url的hash结果来分配请求，后端服务器为缓存时比较有效。
+upstream ltweb {
+  hash $request_uri consistent;
+  server 192.168.1.84:8992;
+  server 192.168.1.85:8992;
+}
+#fair 按后端服务器的响应时间来分配请求，响应时间短的优先分配。 
+upstream ltweb {
+  server 192.168.1.84:8992;
+  server 192.168.1.85:8992;
+}
+
+
+
+
+

@@ -1,0 +1,8 @@
+1.把源jar包cp到一个空文件夹里，然后把该jar包解压
+jar -xf www.itxm.cn-0.0.1-SNAPSHOT.jar
+2.进入BOOT-INF文件夹，找到class文件夹，把要升级的class文件放到相对应的目录里
+3.把该文件夹里的源jar包删除
+rm -rf www.itxm.cn-0.0.1-SNAPSHOT.jar
+4.重新打包
+jar -cfM0 www.itxm.cn-0.0.1-SNAPSHOT.jar *
+5.把打好的jar包cp到启动目录，启动就ok

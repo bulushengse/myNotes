@@ -1,0 +1,39 @@
+﻿下载安装Erlang    管理员
+配置环境变量ERLANG_HOME=D:\DevelopmenteTools\erl10.5
+Path +=%ERLANG_HOME%\bin
+
+下载安装RabbitMQ   管理员
+配置环境变量RABBITMQ_HOME=D:\DevelopmenteTools\RabbitMQ\rabbitmq_server-3.8.0
+Path +=%RABBITMQ%\sbin
+安装完成 RabbitMQ服务是自启的
+
+开启RabbitMQ Web管理插件
+在RabbitMQ安装目录sbin下     执行rabbitmq-plugins enable rabbitmq_management
+重启MQ，访问http://localhost:15672/，用户名和密码都是guest
+
+如果rabbitmqctl status 命令报错：
+Could not update enabled plugins file at  enabled_plugins: target node rabbit
+
+解决方法：cmd 管理员
+rabbitmq-service.bat remove
+set RABBITMQ_BASE=D:\DevelopmenteTools\RabbitMQ\data
+rabbitmq-service.bat install
+set RABBITMQ_BASE=D:\DevelopmenteTools\RabbitMQ\data
+rabbitmq-plugins enable rabbitmq_management
+
+
+rabbitMq启动脚本bat
+@echo off
+@ ECHO 启动 RabbitMQ 服务
+net start "RabbitMQ"
+@ ECHO 开启 RabbitMQ Web管理插件
+set RABBITMQ_BASE=D:\DevelopmenteTools\RabbitMQ\data
+rabbitmq-plugins enable rabbitmq_management
+@ ECHO 启动完毕 按任意键继续
+pause
+exit
+
+
+详细见rabbitMQ_demo
+
+

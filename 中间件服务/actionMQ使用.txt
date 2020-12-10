@@ -1,0 +1,7 @@
+* 1.下载ActiveMQ 去官方网站下载：http://activemq.apache.org/
+
+ * 2.运行ActiveMQ  解压缩apache-activemq-5.15.9-bin.zip，然后双击apache-activemq-5.15.9\bin\activemq.bat运行ActiveMQ程序。
+
+* 3.启动ActiveMQ以后，登陆：http://localhost:8161/admin/，创建一个Queue，命名为myQueue。
+
+详细见actionMQ_demo
