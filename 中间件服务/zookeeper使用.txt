@@ -2,6 +2,8 @@ zookeeper是一个分布式程序的高性能协调服务，
 提供集中式信息存储服务，数据存储于内存中，类似文件系统的树形结构，高吞吐量和低延时，集群高可靠
 基于zookeeper可以实现分布式统一配置中心、分布式锁、服务注册中心。
 
+详细介绍https://www.cnblogs.com/sunddenly/p/4033574.html
+
 下载地址：https://mirrors.cnnic.cn/apache/zookeeper/zookeeper-3.4.14/ 解压到指定目录下，
 修改zookeeper-3.4.14/conf/zoo_sample.cfg 文件名为 zoo.cfg，修改内容如下：
 
